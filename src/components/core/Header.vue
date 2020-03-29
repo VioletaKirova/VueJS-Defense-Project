@@ -1,7 +1,7 @@
 <template>
   <div id="header">
-    <app-nav-drawer :drawerValue="drawerValue"></app-nav-drawer>
-    <app-nav-bar :drawerValue="drawerValue" @toggle="toggleHandler($event)"></app-nav-bar>
+    <app-nav-drawer :drawer="drawerValue"></app-nav-drawer>
+    <app-nav-bar :drawer="drawerValue" @toggle="toggleDrawerHandler($event)"></app-nav-bar>
   </div>
 </template>
 
@@ -13,15 +13,15 @@ export default {
   data: function() {
     return {
       drawerValue: true
-    }
+    };
   },
   components: {
     AppNavDrawer,
     AppNavBar
   },
   methods: {
-    toggleHandler(value) {
-     this.drawerValue = value;
+    toggleDrawerHandler(value) {
+      this.drawerValue = value;
     }
   }
 };

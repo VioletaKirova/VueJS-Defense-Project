@@ -21,11 +21,11 @@
 <script>
 export default {
   props: {
-    drawerValue: Boolean
+    drawer: Boolean
   },
   methods: {
     toggleDrawerHandler() {
-      this.$emit("toggle", !this.drawerValue);
+      this.$emit("toggle", !this.drawer);
     }
   }
 };

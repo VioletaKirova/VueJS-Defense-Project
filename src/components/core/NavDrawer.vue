@@ -1,5 +1,5 @@
 <template>
-  <v-navigation-drawer v-if="drawerValue" v-model="drawer" :clipped="$vuetify.breakpoint.lgAndUp" app>
+  <v-navigation-drawer v-if="drawer" :clipped="$vuetify.breakpoint.lgAndUp" app>
     <v-list dense>
       <template v-for="item in items">
         <v-row v-if="item.heading" :key="item.heading" align="center">
@@ -49,11 +49,10 @@
 <script>
 export default {
   props: {
-    drawerValue: Boolean
+    drawer: Boolean
   },
   data: function() {
     return {
-      drawer: null,
       items: [
         { icon: "mdi-view-list", text: "Tasks", route: "/" },
         {
@@ -77,4 +76,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.v-list-item--active {
+  color: #1976D2;
+}
 </style>
