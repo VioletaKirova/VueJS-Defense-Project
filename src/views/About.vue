@@ -1,6 +1,12 @@
 <template>
   <div class="about">
-    <h1>This is an about page</h1>
+    <v-content>
+      <v-container class="fill-height" fluid>
+        <v-row align="center" justify="center">
+          <h1>ABOUT</h1>
+        </v-row>
+      </v-container>
+    </v-content>
   </div>
 </template>
 

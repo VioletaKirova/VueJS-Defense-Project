@@ -19,7 +19,7 @@
         >
           <template v-slot:activator>
             <v-list-item-content>
-              <v-list-item-title>{{ item.text }}</v-list-item-title>
+              <v-list-item-title>{{ item.model ? item.text : item['text-alt'] }}</v-list-item-title>
             </v-list-item-content>
           </template>
           <v-list-item v-for="(child, i) in item.children" :key="i" link>
@@ -27,7 +27,8 @@
               <v-icon>{{ child.icon }}</v-icon>
             </v-list-item-action>
             <v-list-item-content>
-              <v-list-item-title>{{ child.text }}</v-list-item-title>
+              <v-list-item-title v-if="child.route"><v-list-item :to="child.route" link>{{ child.text }}</v-list-item></v-list-item-title>       
+              <v-list-item-title v-else>{{ child.text }}</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
         </v-list-group>
@@ -36,7 +37,8 @@
             <v-icon>{{ item.icon }}</v-icon>
           </v-list-item-action>
           <v-list-item-content>
-            <v-list-item-title>{{ item.text }}</v-list-item-title>
+            <v-list-item-title v-if="item.route"><v-list-item :to="item.route" link>{{ item.text }}</v-list-item></v-list-item-title>       
+            <v-list-item-title v-else>{{ item.text }}</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
       </template>
@@ -53,20 +55,21 @@ export default {
     return {
       drawer: null,
       items: [
-        { icon: "mdi-view-list", text: "Tasks" },
+        { icon: "mdi-view-list", text: "Tasks", route: "/" },
         {
           icon: "mdi-chevron-up",
           "icon-alt": "mdi-chevron-down",
-          text: "More",
+          text: "Less",
+          "text-alt": "More",
           model: true,
           children: [
-            { icon: "mdi-check", text: "Done" },
-            { icon: "mdi-progress-clock", text: "In Progress" },
-            { icon: "mdi-delete", text: "Deleted" }
+            { icon: "mdi-check", text: "Done", route: "/done" },
+            { icon: "mdi-progress-clock", text: "In Progress", route: "/in-progress" },
+            { icon: "mdi-delete", text: "Deleted", route: "/deleted" }
           ]
         },
-        { icon: "mdi-settings", text: "Settings" },
-        { icon: "mdi-information", text: "About" }
+        { icon: "mdi-settings", text: "Settings", route: "/settings" },
+        { icon: "mdi-information", text: "About", route: "/about" }
       ]
     };
   }

@@ -1,14 +1,21 @@
 <template>
   <v-app>
     <div id="app">
-      <div id="nav">
-        <router-link to="/">Home</router-link>|
-        <router-link to="/about">About</router-link>
-      </div>
+      <app-header></app-header>
       <router-view />
     </div>
   </v-app>
 </template>
+
+<script>
+import AppHeader from "./components/core/Header.vue";
+
+export default {
+  components: {
+    AppHeader
+  }
+}
+</script>
 
 <style lang="scss">
 </style>

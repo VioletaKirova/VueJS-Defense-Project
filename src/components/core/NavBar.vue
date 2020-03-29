@@ -13,6 +13,8 @@
       class="hidden-sm-and-down"
     />
     <v-spacer />
+    <v-btn to="/register" class="nav-bar-btn" color="primary">Register</v-btn>
+    <v-btn to="/login" class="nav-bar-btn" color="primary">Login</v-btn>
   </v-app-bar>
 </template>
 
@@ -30,4 +32,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.nav-bar-btn {
+  margin-left: 8px;
+}
 </style>
