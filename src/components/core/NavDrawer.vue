@@ -27,7 +27,9 @@
               <v-icon>{{ child.icon }}</v-icon>
             </v-list-item-action>
             <v-list-item-content>
-              <v-list-item-title v-if="child.route"><v-list-item :to="child.route" link>{{ child.text }}</v-list-item></v-list-item-title>       
+              <v-list-item-title v-if="child.route">
+                <v-list-item :to="child.route" link>{{ child.text }}</v-list-item>
+              </v-list-item-title>
               <v-list-item-title v-else>{{ child.text }}</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
@@ -37,7 +39,9 @@
             <v-icon>{{ item.icon }}</v-icon>
           </v-list-item-action>
           <v-list-item-content>
-            <v-list-item-title v-if="item.route"><v-list-item :to="item.route" link>{{ item.text }}</v-list-item></v-list-item-title>       
+            <v-list-item-title v-if="item.route">
+              <v-list-item :to="item.route" link>{{ item.text }}</v-list-item>
+            </v-list-item-title>
             <v-list-item-title v-else>{{ item.text }}</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
@@ -54,7 +58,7 @@ export default {
   data: function() {
     return {
       items: [
-        { icon: "mdi-view-list", text: "Tasks", route: "/" },
+        { icon: "mdi-view-list", text: "Tasks", route: "/tasks" },
         {
           icon: "mdi-chevron-up",
           "icon-alt": "mdi-chevron-down",
@@ -63,7 +67,11 @@ export default {
           model: true,
           children: [
             { icon: "mdi-check", text: "Done", route: "/done" },
-            { icon: "mdi-progress-clock", text: "In Progress", route: "/in-progress" },
+            {
+              icon: "mdi-progress-clock",
+              text: "In Progress",
+              route: "/in-progress"
+            },
             { icon: "mdi-delete", text: "Deleted", route: "/deleted" }
           ]
         },
@@ -76,7 +84,16 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.v-list-item--active {
+a.v-list-item {
+  &:before,
+  &:hover,
+  &:active,
+  &:focus {
+    background-color: transparent;
+  }
+}
+
+.v-list-item .v-list-item--active {
   color: #1976D2;
 }
 </style>
