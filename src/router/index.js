@@ -20,7 +20,7 @@ const routes = [
     path: "/tasks",
     name: "Tasks",
     component: () =>
-      import("../components/shared/Tasks.vue")
+      import("../components/Tasks.vue")
   }
 ];
 

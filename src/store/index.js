@@ -3,9 +3,39 @@ import Vuex from "vuex";
 
 Vue.use(Vuex);
 
-export default new Vuex.Store({
-  state: {},
+const taskStore = {
+  namespaced: true,
+  state: {
+    tasks: {
+      "01": {
+        description: "Task 1",
+        completed: false,
+        date: "22/05/2020",
+        time: "18:00"
+      },
+      "02": {
+        description: "Task 2",
+        completed: false,
+        date: "30/05/2020",
+        time: "08:00"
+      },
+      "03": {
+        description: "Task 3",
+        completed: false,
+        date: "03/06/2020",
+        time: "15:00"
+      }
+    }
+  },
   mutations: {},
   actions: {},
-  modules: {}
+  getters: {
+    tasks(state) {
+      return state.tasks;
+    }
+  }
+};
+
+export default new Vuex.Store({
+  modules: { taskStore }
 });
