@@ -1,11 +1,7 @@
 <template>
   <div class="home">
-    <v-content>
-      <v-container class="fill-height" fluid>
-        <v-row align="center" justify="center"></v-row>
-      </v-container>
-    </v-content>
-    <v-btn bottom color="pink" dark fab fixed right @click="dialog = !dialog">
+    <app-tasks></app-tasks>
+    <v-btn bottom color="primary" dark fab fixed right @click="dialog = !dialog">
       <v-icon>mdi-plus</v-icon>
     </v-btn>
     <v-dialog v-model="dialog" width="800px">
@@ -50,6 +46,8 @@
 </template>
 
 <script>
+import AppTasks from "./shared/Tasks.vue"
+
 export default {
   props: {
     source: String
@@ -58,6 +56,9 @@ export default {
     return {
       dialog: false
     };
+  },
+  components: {
+    AppTasks
   }
 };
 </script>

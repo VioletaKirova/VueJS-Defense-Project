@@ -15,12 +15,6 @@ const routes = [
     name: "About",
     component: () =>
       import("../components/About.vue")
-  },
-  {
-    path: "/tasks",
-    name: "Tasks",
-    component: () =>
-      import("../components/Tasks.vue")
   }
 ];
 

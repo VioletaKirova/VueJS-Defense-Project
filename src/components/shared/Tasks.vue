@@ -23,7 +23,7 @@
 
 <script>
 import { mapGetters } from "vuex";
-import AppTask from "./shared/Task.vue";
+import AppTask from "./Task.vue";
 
 export default {
   computed: {
@@ -44,7 +44,7 @@ export default {
   margin-left: 1px;
 }
 
-.v-subheader {
+.theme--light.v-subheader {
   font-size: 20px;
   font-weight: bold;
   color: #1976d2;
