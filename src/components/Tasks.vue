@@ -14,7 +14,6 @@
                 </template>
               </v-list-item-group>
             </v-list>
-            {{tasks}}
           </v-card>
         </v-row>
       </v-container>
@@ -23,13 +22,12 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 import AppTask from "./shared/Task.vue";
 
 export default {
   computed: {
-    tasks() {
-      return this.$store.getters["taskStore/tasks"];
-    }
+    ...mapGetters("taskStore", ["tasks"])
   },
   components: {
     AppTask

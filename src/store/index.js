@@ -27,8 +27,22 @@ const taskStore = {
       }
     }
   },
-  mutations: {},
-  actions: {},
+  mutations: {
+    updateById(state, data) {
+      state.tasks[data.id].completed = data.value;
+    },
+    deleteById(state, id) {
+      Vue.delete(state.tasks, id);
+    }
+  },
+  actions: {
+    updateById({ commit }, data) {
+      commit("updateById", data);
+    },
+    deleteById({ commit }, id) {
+      commit("deleteById", id);
+    }
+  },
   getters: {
     tasks(state) {
       return state.tasks;
