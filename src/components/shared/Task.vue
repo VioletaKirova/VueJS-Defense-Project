@@ -14,7 +14,7 @@
           <v-list-item-title :class="{ completed: task.completed }">{{ task.description }}</v-list-item-title>
         </v-list-item-content>
 
-        <v-list-item-action class="datetime-wrapper">
+        <v-list-item-action v-if="task.date || task.time" class="datetime-wrapper">
           <v-icon>mdi-calendar</v-icon>
           <v-list-item-action-text class="datetime" v-text="task.date"></v-list-item-action-text>
           <v-list-item-action-text class="datetime" v-text="task.time"></v-list-item-action-text>

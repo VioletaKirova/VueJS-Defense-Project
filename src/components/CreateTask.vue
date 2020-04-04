@@ -59,7 +59,6 @@
                 <v-btn text color="primary" @click="$refs.timeDialog.save(time)">OK</v-btn>
               </v-time-picker>
             </v-dialog>
-
             <v-btn class="mr-4" @click="submit">submit</v-btn>
             <v-btn @click="clear">clear</v-btn>
           </form>
@@ -72,6 +71,7 @@
 <script>
 import { validationMixin } from "vuelidate";
 import { required, maxLength } from "vuelidate/lib/validators";
+import { mapActions } from "vuex";
 
 export default {
   mixins: [validationMixin],
@@ -83,8 +83,9 @@ export default {
   },
   data: function() {
     return {
+      task: {},
       description: "",
-      date: new Date().toISOString().substr(0, 10),
+      date: null,
       dateDialog: false,
       time: null,
       timeDialog: false
@@ -95,7 +96,6 @@ export default {
       const errors = [];
 
       if (!this.$v.description.$dirty) {
-        console.log(this.$refs);
         return errors;
       }
 
@@ -111,13 +111,26 @@ export default {
     }
   },
   methods: {
+    ...mapActions("taskStore", ["create"]),
     submit() {
       this.$v.$touch();
+
+      if (!this.$v.$error) {
+        this.task = {
+          description: this.description,
+          date: this.date,
+          time: this.time,
+          completed: false
+        };
+
+        this.create(this.task);
+        this.$router.push("/");
+      }
     },
     clear() {
       this.$v.$reset();
       this.description = "";
-      this.date = new Date().toISOString().substr(0, 10);
+      this.date = null;
       this.time = null;
     }
   }
