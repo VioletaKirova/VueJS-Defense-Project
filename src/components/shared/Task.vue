@@ -27,7 +27,7 @@
             <v-btn text small color="error" v-on="on">Delete</v-btn>
           </template>
           <v-card>
-            <v-card-title class="headline grey lighten-2" primary-title>Not doing that?</v-card-title>
+            <v-card-title class="headline grey lighten-2" primary-title>Are you sure?</v-card-title>
 
             <v-divider></v-divider>
 

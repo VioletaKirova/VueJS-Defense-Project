@@ -9,7 +9,6 @@
               <v-list-item-group multiple>
                 <template v-for="(task, key, index) in tasks">
                   <v-divider :key="index"></v-divider>
-
                   <app-task :key="key" :id="key" :task="task"></app-task>
                 </template>
               </v-list-item-group>
@@ -36,15 +35,15 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.mx-auto {
+.v-card {
   width: 100%;
 }
 
-.row.align-center.justify-center {
+.row {
   margin-left: 1px;
 }
 
-.theme--light.v-subheader {
+div.v-subheader {
   font-size: 20px;
   font-weight: bold;
   color: #1976d2;

@@ -1,5 +1,5 @@
 <template>
-  <div id="header">
+  <div class="header">
     <app-nav-drawer :drawer="drawerValue"></app-nav-drawer>
     <app-nav-bar :drawer="drawerValue" @toggle="toggleDrawerHandler($event)"></app-nav-bar>
   </div>
