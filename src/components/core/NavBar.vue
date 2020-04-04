@@ -1,6 +1,6 @@
 <template>
   <v-app-bar :clipped-left="$vuetify.breakpoint.lgAndUp" app color="blue darken-3" dark>
-    <v-app-bar-nav-icon @click="toggleDrawerHandler()" />
+    <v-app-bar-nav-icon @click="toggleDrawerHandler" />
     <v-toolbar-title style="width: 300px" class="ml-0 pl-4">
       <span class="hidden-sm-and-down">Do It</span>
     </v-toolbar-title>

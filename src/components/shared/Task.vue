@@ -1,6 +1,7 @@
 <template>
   <div class="task">
     <v-list-item>
+      
       <template>
         <v-list-item-action>
           <v-checkbox
@@ -20,6 +21,7 @@
           <v-list-item-action-text class="datetime" v-text="task.time"></v-list-item-action-text>
         </v-list-item-action>
       </template>
+
       <v-col class="text-center actions-wrapper" cols="12" sm="1">
         <v-btn text small color="primary">Edit</v-btn>
         <v-dialog v-model="dialog" width="400">
@@ -38,6 +40,7 @@
           </v-card>
         </v-dialog>
       </v-col>
+
     </v-list-item>
   </div>
 </template>

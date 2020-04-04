@@ -14,53 +14,9 @@
               @input="$v.description.$touch()"
               @blur="$v.description.$touch()"
             ></v-textarea>
-            <v-dialog
-              ref="dateDialog"
-              v-model="dateDialog"
-              :return-value.sync="date"
-              persistent
-              width="290px"
-            >
-              <template v-slot:activator="{ on }">
-                <v-text-field
-                  v-model="date"
-                  label="Date"
-                  prepend-icon="mdi-calendar"
-                  readonly
-                  v-on="on"
-                ></v-text-field>
-              </template>
-              <v-date-picker v-model="date" scrollable>
-                <v-spacer></v-spacer>
-                <v-btn text color="primary" @click="dateDialog = false">Cancel</v-btn>
-                <v-btn text color="primary" @click="$refs.dateDialog.save(date)">OK</v-btn>
-              </v-date-picker>
-            </v-dialog>
-
-            <v-dialog
-              ref="timeDialog"
-              v-model="timeDialog"
-              :return-value.sync="time"
-              persistent
-              width="290px"
-            >
-              <template v-slot:activator="{ on }">
-                <v-text-field
-                  v-model="time"
-                  label="Time"
-                  prepend-icon="mdi-clock-outline"
-                  readonly
-                  v-on="on"
-                ></v-text-field>
-              </template>
-              <v-time-picker v-if="timeDialog" v-model="time" full-width>
-                <v-spacer></v-spacer>
-                <v-btn text color="primary" @click="timeDialog = false">Cancel</v-btn>
-                <v-btn text color="primary" @click="$refs.timeDialog.save(time)">OK</v-btn>
-              </v-time-picker>
-            </v-dialog>
-            <v-btn class="mr-4" @click="submit">submit</v-btn>
-            <v-btn @click="clear">clear</v-btn>
+            <app-date-dialog @setDate="setDateHandler($event)"></app-date-dialog>
+            <app-time-dialog @setTime="setTimeHandler($event)"></app-time-dialog>
+            <v-btn class="mr-4" color="primary" @click="submit">submit</v-btn>
           </form>
         </v-row>
       </v-container>
@@ -69,6 +25,8 @@
 </template>
 
 <script>
+import AppTimeDialog from "./shared/TimeDialog.vue";
+import AppDateDialog from "./shared/DateDialog.vue";
 import { validationMixin } from "vuelidate";
 import { required, maxLength } from "vuelidate/lib/validators";
 import { mapActions } from "vuex";
@@ -86,9 +44,7 @@ export default {
       task: {},
       description: "",
       date: null,
-      dateDialog: false,
-      time: null,
-      timeDialog: false
+      time: null
     };
   },
   computed: {
@@ -112,6 +68,12 @@ export default {
   },
   methods: {
     ...mapActions("taskStore", ["create"]),
+    setDateHandler(value) {
+      this.date = value;
+    },
+    setTimeHandler(value) {
+      this.time = value;
+    },
     submit() {
       this.$v.$touch();
 
@@ -126,13 +88,11 @@ export default {
         this.create(this.task);
         this.$router.push("/");
       }
-    },
-    clear() {
-      this.$v.$reset();
-      this.description = "";
-      this.date = null;
-      this.time = null;
     }
+  },
+  components: {
+    AppTimeDialog,
+    AppDateDialog
   }
 };
 </script>
@@ -151,6 +111,6 @@ form {
   font-size: 20px;
   font-weight: bold;
   color: #1976d2;
-  margin: 5px 0 0 5px;
+  margin: 5px 0 0 3px;
 }
 </style>
