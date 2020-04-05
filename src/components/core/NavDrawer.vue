@@ -66,13 +66,12 @@ export default {
           "text-alt": "More",
           model: true,
           children: [
-            { icon: "mdi-check", text: "Done", route: "/done" },
             {
               icon: "mdi-progress-clock",
               text: "In Progress",
               route: "/in-progress"
             },
-            { icon: "mdi-delete", text: "Deleted", route: "/deleted" }
+            { icon: "mdi-check", text: "Completed", route: "/completed" },
           ]
         },
         { icon: "mdi-settings", text: "Settings", route: "/settings" },

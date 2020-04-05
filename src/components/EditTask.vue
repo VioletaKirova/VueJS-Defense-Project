@@ -49,12 +49,12 @@ export default {
     };
   },
   computed: {
-    ...mapGetters("taskStore", ["tasks"]),
+    ...mapGetters("taskStore", ["allTasks"]),
     currentTaskId() {
       return this.$route.params.id;
     },
     currentTask() {
-      return this.tasks[this.currentTaskId];
+      return this.allTasks[this.currentTaskId];
     },
     descriptionErrors() {
       const errors = [];
@@ -90,6 +90,7 @@ export default {
           description: this.description,
           date: this.date,
           time: this.time,
+          inProgress: false,
           completed: false
         };
 

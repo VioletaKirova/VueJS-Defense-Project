@@ -1,19 +1,19 @@
 <template>
-  <div class="tasks">
+  <div class="task-list">
     <v-content>
       <v-container class="fill-height" fluid>
         <v-row align="center" justify="center">
           <v-card class="mx-auto">
             <v-list v-if="Object.keys(tasks).length !== 0" subheader two-line flat>
-              <v-subheader>Your Tasks</v-subheader>
+              <v-subheader><slot></slot></v-subheader>
               <v-list-item-group multiple>
                 <template v-for="(task, key, index) in tasks">
                   <v-divider :key="index"></v-divider>
-                  <app-task :key="key" :id="key" :task="task"></app-task>
+                  <app-task :key="key" :id="key" :task="task" :listType="listType"></app-task>
                 </template>
               </v-list-item-group>
             </v-list>
-            <template v-else>
+            <template v-else-if="listType !== 'inProgressTasks' && listType !== 'completedTasks'">
               <v-subheader>All done!</v-subheader>
               <router-link to="/create">
                 <v-btn small color="primary">Add a new task</v-btn>
@@ -28,11 +28,17 @@
 
 <script>
 import AppTask from "./Task.vue";
-import { mapGetters } from "vuex";
 
 export default {
+  props: {
+    listType: {
+      required: true
+    }
+  },
   computed: {
-    ...mapGetters("taskStore", ["tasks"])
+    tasks() {
+      return this.$store.getters[`taskStore/${this.listType}`];
+    }
   },
   components: {
     AppTask
@@ -57,6 +63,6 @@ div.v-subheader {
 }
 
 .v-btn {
-  margin: 5px 0 20px 20px;
+  margin: 5px 0 20px 18px;
 }
 </style>

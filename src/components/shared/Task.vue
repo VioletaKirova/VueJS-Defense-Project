@@ -14,6 +14,23 @@
           <v-list-item-title :class="{ completed: task.completed }">{{ task.description }}</v-list-item-title>
         </v-list-item-content>
 
+        <v-list-item-action>
+          <v-btn
+            v-if="!task.inProgress && listType !== 'completedTasks'"
+            small
+            color="primary"
+            class="status-btn"
+            @click="changeStatus(id, !task.inProgress)"
+          >In Progress</v-btn>
+          <v-btn
+            v-else-if="task.inProgress"
+            small
+            color="error"
+            class="status-btn"
+            @click="changeStatus(id, !task.inProgress)"
+          >Not In Progress</v-btn>
+        </v-list-item-action>
+
         <v-list-item-action v-if="task.date || task.time" class="datetime-wrapper">
           <v-icon>mdi-calendar</v-icon>
           <v-list-item-action-text class="datetime" v-text="task.date"></v-list-item-action-text>
@@ -54,10 +71,17 @@ export default {
   },
   props: {
     id: String,
-    task: Object
+    task: Object,
+    listType: {
+      type: String,
+      required: true
+    }
   },
   methods: {
     ...mapActions("taskStore", ["updateById", "deleteById"]),
+    changeStatus(id, value) {
+      this.updateById({ id, value: { inProgress: value } });
+    },
     navigateToEdit() {
       this.$router.push({ name: "Edit", params: { id: this.id } });
     },
@@ -84,6 +108,10 @@ export default {
 .datetime {
   font-size: 14px;
   padding-top: 2px;
+}
+
+.status-btn {
+  margin-right: 20px;
 }
 
 .mdi-calendar {

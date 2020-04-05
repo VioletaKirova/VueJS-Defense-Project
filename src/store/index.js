@@ -10,18 +10,21 @@ const taskStore = {
     tasks: {
       "01": {
         description: "Task 1",
+        inProgress: false,
         completed: false,
         date: "22/05/2020",
         time: "18:00",
       },
       "02": {
         description: "Task 2",
+        inProgress: false,
         completed: false,
         date: "30/05/2020",
         time: "08:00",
       },
       "03": {
         description: "Task 3",
+        inProgress: false,
         completed: false,
         date: "03/06/2020",
         time: "15:00",
@@ -54,8 +57,41 @@ const taskStore = {
     },
   },
   getters: {
-    tasks(state) {
+    allTasks(state) {
       return state.tasks;
+    },
+    todoTasks(state) {
+      const tasks = {};
+
+      Object.keys(state.tasks).forEach((id) => {
+        if (!state.tasks[id].completed && !state.tasks[id].inProgress) {
+          tasks[id] = state.tasks[id];
+        }
+      });
+
+      return tasks;
+    },
+    inProgressTasks(state) {
+      const tasks = {};
+
+      Object.keys(state.tasks).forEach((id) => {
+        if (state.tasks[id].inProgress && !state.tasks[id].completed) {
+          tasks[id] = state.tasks[id];
+        }
+      });
+
+      return tasks;
+    },
+    completedTasks(state) {
+      const tasks = {};
+
+      Object.keys(state.tasks).forEach((id) => {
+        if (state.tasks[id].completed) {
+          tasks[id] = state.tasks[id];
+        }
+      });
+
+      return tasks;
     },
   },
 };

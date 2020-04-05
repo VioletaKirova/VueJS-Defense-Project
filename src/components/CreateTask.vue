@@ -82,6 +82,7 @@ export default {
           description: this.description,
           date: this.date,
           time: this.time,
+          inProgress: false,
           completed: false
         };
 

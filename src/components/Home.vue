@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <app-tasks></app-tasks>
+    <app-task-lists></app-task-lists>
     <router-link to="/create">
       <v-btn bottom color="primary" dark fab fixed right>
         <v-icon>mdi-plus</v-icon>
@@ -10,11 +10,11 @@
 </template>
 
 <script>
-import AppTasks from "./shared/Tasks.vue";
+import AppTaskLists from "./shared/TaskLists.vue";
 
 export default {
   components: {
-    AppTasks
+    AppTaskLists
   }
 };
 </script>
