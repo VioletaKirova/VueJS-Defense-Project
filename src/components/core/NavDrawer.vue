@@ -52,9 +52,6 @@
 
 <script>
 export default {
-  props: {
-    drawer: Boolean
-  },
   data: function() {
     return {
       items: [
@@ -78,6 +75,9 @@ export default {
         { icon: "mdi-information", text: "About", route: "/about" }
       ]
     };
+  },
+  props: {
+    drawer: Boolean
   }
 };
 </script>

@@ -13,11 +13,15 @@
                 </template>
               </v-list-item-group>
             </v-list>
-            <template v-else-if="listType !== 'inProgressTasks' && listType !== 'completedTasks'">
+            <template v-else-if="listType !== 'inProgressTasks' && listType !== 'completedTasks' && !searchValue">
               <v-subheader>All done!</v-subheader>
               <router-link to="/create">
                 <v-btn small color="primary">Add a new task</v-btn>
               </router-link>
+            </template>
+            <template v-else-if="listType !== 'inProgressTasks' && listType !== 'completedTasks' && searchValue">
+              <v-subheader>No results!</v-subheader>
+              <v-btn small color="primary" @click="setSearchValue('')">Back to all tasks</v-btn>
             </template>
           </v-card>
         </v-row>
@@ -28,6 +32,7 @@
 
 <script>
 import AppTask from "./Task.vue";
+import { mapState, mapActions } from "vuex";
 
 export default {
   props: {
@@ -36,9 +41,13 @@ export default {
     }
   },
   computed: {
+    ...mapState("taskStore", ["searchValue"]),
     tasks() {
       return this.$store.getters[`taskStore/${this.listType}`];
     }
+  },
+  methods: {
+    ...mapActions("taskStore", ["setSearchValue"])
   },
   components: {
     AppTask

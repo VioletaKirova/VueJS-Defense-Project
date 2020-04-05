@@ -1,8 +1,6 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "../components/Home.vue";
-import InProgressTasks from "../components/InProgressTasks.vue";
-import CompletedTasks from "../components/CompletedTasks.vue";
 
 Vue.use(VueRouter);
 
@@ -15,12 +13,14 @@ const routes = [
   {
     path: "/in-progress",
     name: "InProgress",
-    component: InProgressTasks
+    component: () =>
+      import("../components/InProgressTasks.vue")
   },
   {
     path: "/completed",
     name: "Completed",
-    component: CompletedTasks
+    component: () =>
+      import("../components/CompletedTasks.vue")
   },
   {
     path: "/create",

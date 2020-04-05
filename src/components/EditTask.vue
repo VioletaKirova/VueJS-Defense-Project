@@ -34,12 +34,6 @@ import { mapGetters } from "vuex";
 
 export default {
   mixins: [validationMixin],
-  validations: {
-    description: {
-      required,
-      maxLength: maxLength(512)
-    }
-  },
   data: function() {
     return {
       task: {},
@@ -72,6 +66,12 @@ export default {
       }
 
       return errors;
+    }
+  },
+  validations: {
+    description: {
+      required,
+      maxLength: maxLength(512)
     }
   },
   methods: {

@@ -30,6 +30,7 @@ const taskStore = {
         time: "15:00",
       },
     },
+    searchValue: "",
   },
   mutations: {
     create(state, data) {
@@ -40,6 +41,9 @@ const taskStore = {
     },
     deleteById(state, id) {
       Vue.delete(state.tasks, id);
+    },
+    setSearchValue(state, value) {
+      state.searchValue = value;
     },
   },
   actions: {
@@ -55,39 +59,60 @@ const taskStore = {
     deleteById({ commit }, id) {
       commit("deleteById", id);
     },
+    setSearchValue({ commit }, value) {
+      commit("setSearchValue", value);
+    },
   },
   getters: {
     allTasks(state) {
       return state.tasks;
     },
-    todoTasks(state) {
+    filteredTasks(state, getters) {
       const tasks = {};
 
-      Object.keys(state.tasks).forEach((id) => {
-        if (!state.tasks[id].completed && !state.tasks[id].inProgress) {
-          tasks[id] = state.tasks[id];
+      if (state.searchValue) {
+        Object.keys(state.tasks).forEach((id) => {
+          if (state.tasks[id].description.toLowerCase().includes(state.searchValue.toLowerCase())) {
+            tasks[id] = state.tasks[id];
+          }
+        });
+
+        return tasks;
+      }
+
+      return getters.allTasks;
+    },
+    todoTasks(state, getters) {
+      const tasks = {};
+      const filteredTasks = getters.filteredTasks;
+
+      Object.keys(filteredTasks).forEach((id) => {
+        if (!filteredTasks[id].completed && !filteredTasks[id].inProgress) {
+          tasks[id] = filteredTasks[id];
         }
       });
 
       return tasks;
     },
-    inProgressTasks(state) {
+    inProgressTasks(state, getters) {
       const tasks = {};
+      const filteredTasks = getters.filteredTasks;
 
-      Object.keys(state.tasks).forEach((id) => {
-        if (state.tasks[id].inProgress && !state.tasks[id].completed) {
-          tasks[id] = state.tasks[id];
+      Object.keys(filteredTasks).forEach((id) => {
+        if (filteredTasks[id].inProgress && !filteredTasks[id].completed) {
+          tasks[id] = filteredTasks[id];
         }
       });
 
       return tasks;
     },
-    completedTasks(state) {
+    completedTasks(state, getters) {
       const tasks = {};
+      const filteredTasks = getters.filteredTasks;
 
-      Object.keys(state.tasks).forEach((id) => {
-        if (state.tasks[id].completed) {
-          tasks[id] = state.tasks[id];
+      Object.keys(filteredTasks).forEach((id) => {
+        if (filteredTasks[id].completed) {
+          tasks[id] = filteredTasks[id];
         }
       });
 

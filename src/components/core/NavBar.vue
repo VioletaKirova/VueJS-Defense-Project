@@ -4,14 +4,7 @@
     <v-toolbar-title style="width: 300px" class="ml-0 pl-4">
       <span class="hidden-sm-and-down">Do It</span>
     </v-toolbar-title>
-    <v-text-field
-      flat
-      solo-inverted
-      hide-details
-      prepend-inner-icon="mdi-magnify"
-      label="Search"
-      class="hidden-sm-and-down"
-    />
+    <app-search-bar></app-search-bar>
     <v-spacer />
     <v-btn to="/register" class="nav-bar-btn" color="primary">Register</v-btn>
     <v-btn to="/login" class="nav-bar-btn" color="primary">Login</v-btn>
@@ -19,6 +12,8 @@
 </template>
 
 <script>
+import AppSearchBar from "./SearchBar.vue";
+
 export default {
   props: {
     drawer: Boolean
@@ -27,6 +22,9 @@ export default {
     toggleDrawerHandler() {
       this.$emit("toggle", !this.drawer);
     }
+  },
+  components: {
+    AppSearchBar
   }
 };
 </script>

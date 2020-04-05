@@ -15,14 +15,14 @@ export default {
       drawerValue: true
     };
   },
-  components: {
-    AppNavDrawer,
-    AppNavBar
-  },
   methods: {
     toggleDrawerHandler(value) {
       this.drawerValue = value;
     }
+  },
+  components: {
+    AppNavDrawer,
+    AppNavBar
   }
 };
 </script>
