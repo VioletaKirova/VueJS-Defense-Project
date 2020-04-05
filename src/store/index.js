@@ -28,7 +28,7 @@ const taskStore = {
         completed: false,
         date: "03/06/2020",
         time: "15:00",
-      },
+      }
     },
     searchValue: "",
   },

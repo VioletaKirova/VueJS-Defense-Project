@@ -18,6 +18,15 @@ export default {
 </script>
 
 <style lang="scss">
+form {
+  width: 100%;
+  padding-left: 20px;
+}
+
+.v-input {
+  width: 50%;
+}
+
 div.task-list.in-progress-list > main,
 div.task-list.completed-list > main {
   padding-top: 0px !important;

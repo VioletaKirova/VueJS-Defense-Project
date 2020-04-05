@@ -35,6 +35,18 @@ const routes = [
       import("../components/EditTask.vue")
   },
   {
+    path: "/register",
+    name: "Register",
+    component: () =>
+      import("../components/Register.vue")
+  },
+  {
+    path: "/login",
+    name: "Login",
+    component: () =>
+      import("../components/Login.vue")
+  },
+  {
     path: "/about",
     name: "About",
     component: () =>

@@ -14,7 +14,7 @@
               </v-list-item-group>
             </v-list>
             <template v-else-if="listType !== 'inProgressTasks' && listType !== 'completedTasks' && !searchValue">
-              <v-subheader>All done!</v-subheader>
+              <v-subheader>No tasks to do!</v-subheader>
               <router-link to="/create">
                 <v-btn small color="primary">Add a new task</v-btn>
               </router-link>

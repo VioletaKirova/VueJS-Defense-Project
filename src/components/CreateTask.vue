@@ -16,7 +16,7 @@
             ></v-textarea>
             <app-date-dialog :taskDateValue="null" @setDate="setDateHandler($event)"></app-date-dialog>
             <app-time-dialog :taskTimeValue="null" @setTime="setTimeHandler($event)"></app-time-dialog>
-            <v-btn class="mr-4" color="primary" @click="submit">submit</v-btn>
+            <v-btn class="primary mr-4" @click="submit">Submit</v-btn>
           </form>
         </v-row>
       </v-container>

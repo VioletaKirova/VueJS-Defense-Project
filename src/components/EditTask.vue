@@ -16,7 +16,7 @@
             ></v-textarea>
             <app-date-dialog :taskDateValue="this.date" @setDate="setDateHandler($event)"></app-date-dialog>
             <app-time-dialog :taskTimeValue="this.time" @setTime="setTimeHandler($event)"></app-time-dialog>
-            <v-btn class="mr-4" color="primary" @click="submit">submit</v-btn>
+            <v-btn class="primary mr-4" @click="submit">Submit</v-btn>
           </form>
         </v-row>
       </v-container>
@@ -56,14 +56,12 @@ export default {
       if (!this.$v.description.$dirty) {
         return errors;
       }
-
+      if (!this.$v.description.required) {
+        errors.push("Description is required");
+      }
       if (!this.$v.description.maxLength) {
         errors.push("Description must be at most 512 characters long");
-      }
-
-      if (!this.$v.description.required) {
-        errors.push("Description is required.");
-      }
+      }     
 
       return errors;
     }
@@ -90,8 +88,8 @@ export default {
           description: this.description,
           date: this.date,
           time: this.time,
-          inProgress: false,
-          completed: false
+          inProgress: this.inProgress,
+          completed: this.completed
         };
 
         this.updateById({
@@ -110,20 +108,19 @@ export default {
     this.description = this.currentTask.description;
     this.date = this.currentTask.date;
     this.time = this.currentTask.time;
+
+    if(this.currentTask.inProgress) {
+      this.inProgress = true;
+    }
+
+    if(this.currentTask.completed) {
+      this.completed = true;
+    }
   }
 };
 </script>
 
 <style scoped lang="scss">
-form {
-  width: 100%;
-  padding-left: 20px;
-}
-
-.v-input {
-  width: 50%;
-}
-
 .v-subheader {
   font-size: 20px;
   font-weight: bold;
