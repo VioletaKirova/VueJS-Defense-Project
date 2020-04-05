@@ -25,10 +25,20 @@ export default {
       timeDialog: false,
     };
   },
+  props: {
+    taskTimeValue: {
+      required: true
+    }
+  },
   methods: {
     setTimeHandler() {
       this.$refs.timeDialog.save(this.timeValue);
       this.$emit("setTime", this.timeValue);
+    }
+  },
+  created() {
+    if(this.taskTimeValue) {
+      this.timeValue = this.taskTimeValue;
     }
   }
 };

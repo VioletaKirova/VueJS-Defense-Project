@@ -21,7 +21,13 @@ const routes = [
     name: "Craete",
     component: () =>
       import("../components/CreateTask.vue")
-  }
+  },
+  {
+    path: "/edit/:id",
+    name: "Edit",
+    component: () =>
+      import("../components/EditTask.vue")
+  },
 ];
 
 const router = new VueRouter({

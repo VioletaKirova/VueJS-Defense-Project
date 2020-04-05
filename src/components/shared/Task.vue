@@ -1,7 +1,6 @@
 <template>
   <div class="task">
     <v-list-item>
-      
       <template>
         <v-list-item-action>
           <v-checkbox
@@ -23,16 +22,16 @@
       </template>
 
       <v-col class="text-center actions-wrapper" cols="12" sm="1">
-        <v-btn text small color="primary">Edit</v-btn>
+        <v-btn text small color="primary" @click="navigateToEdit(id)">Edit</v-btn>
+
         <v-dialog v-model="dialog" width="400">
           <template v-slot:activator="{ on }">
             <v-btn text small color="error" v-on="on">Delete</v-btn>
           </template>
+
           <v-card>
             <v-card-title class="headline grey lighten-2" primary-title>Are you sure?</v-card-title>
-
             <v-divider></v-divider>
-
             <v-card-actions class="card-actions-wrapper">
               <v-btn color="error" class="card-delete-btn" text @click="confirmDelete(id)">Delete it</v-btn>
               <v-btn color="primary" text @click="dialog = false">Keep it</v-btn>
@@ -40,7 +39,6 @@
           </v-card>
         </v-dialog>
       </v-col>
-
     </v-list-item>
   </div>
 </template>
@@ -60,6 +58,9 @@ export default {
   },
   methods: {
     ...mapActions("taskStore", ["updateById", "deleteById"]),
+    navigateToEdit() {
+      this.$router.push({ name: "Edit", params: { id: this.id } });
+    },
     confirmDelete(id) {
       this.dialog = false;
       this.deleteById(id);

@@ -3,7 +3,7 @@
     <v-content>
       <v-container class="fill-height" fluid>
         <v-row align="center" justify="start">
-          <v-subheader>Create Task</v-subheader>
+          <v-subheader>Edit Task</v-subheader>
           <form>
             <v-textarea
               v-model="description"
@@ -14,8 +14,8 @@
               @input="$v.description.$touch()"
               @blur="$v.description.$touch()"
             ></v-textarea>
-            <app-date-dialog :taskDateValue="null" @setDate="setDateHandler($event)"></app-date-dialog>
-            <app-time-dialog :taskTimeValue="null" @setTime="setTimeHandler($event)"></app-time-dialog>
+            <app-date-dialog :taskDateValue="this.date" @setDate="setDateHandler($event)"></app-date-dialog>
+            <app-time-dialog :taskTimeValue="this.time" @setTime="setTimeHandler($event)"></app-time-dialog>
             <v-btn class="mr-4" color="primary" @click="submit">submit</v-btn>
           </form>
         </v-row>
@@ -30,6 +30,7 @@ import AppDateDialog from "./shared/DateDialog.vue";
 import { validationMixin } from "vuelidate";
 import { required, maxLength } from "vuelidate/lib/validators";
 import { mapActions } from "vuex";
+import { mapGetters } from "vuex";
 
 export default {
   mixins: [validationMixin],
@@ -48,6 +49,13 @@ export default {
     };
   },
   computed: {
+    ...mapGetters("taskStore", ["tasks"]),
+    currentTaskId() {
+      return this.$route.params.id;
+    },
+    currentTask() {
+      return this.tasks[this.currentTaskId];
+    },
     descriptionErrors() {
       const errors = [];
 
@@ -67,7 +75,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions("taskStore", ["create"]),
+    ...mapActions("taskStore", ["updateById"]),
     setDateHandler(value) {
       this.date = value;
     },
@@ -85,7 +93,10 @@ export default {
           completed: false
         };
 
-        this.create(this.task);
+        this.updateById({
+          id: this.currentTaskId,
+          value: this.task
+        });
         this.$router.push("/");
       }
     }
@@ -93,6 +104,11 @@ export default {
   components: {
     AppTimeDialog,
     AppDateDialog
+  },
+  created() {
+    this.description = this.currentTask.description;
+    this.date = this.currentTask.date;
+    this.time = this.currentTask.time;
   }
 };
 </script>

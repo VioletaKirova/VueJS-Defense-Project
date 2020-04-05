@@ -33,7 +33,7 @@ const taskStore = {
       Vue.set(state.tasks, data.id, data.task);
     },
     updateById(state, data) {
-      state.tasks[data.id].completed = data.value;
+      Object.assign(state.tasks[data.id], data.value);
     },
     deleteById(state, id) {
       Vue.delete(state.tasks, id);

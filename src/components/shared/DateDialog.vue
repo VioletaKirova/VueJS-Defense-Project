@@ -25,10 +25,20 @@ export default {
       dateDialog: false
     }
   },
+  props: {
+    taskDateValue: {
+      required: true
+    }
+  },
   methods: {
     setDateHandler() {
       this.$refs.dateDialog.save(this.dateValue);
       this.$emit("setDate", this.dateValue);
+    }
+  },
+  created() {
+    if(this.taskDateValue) {
+      this.dateValue = this.taskDateValue;
     }
   }
 };
