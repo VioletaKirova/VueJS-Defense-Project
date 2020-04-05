@@ -23,10 +23,9 @@
             @click="changeStatus(id, !task.inProgress)"
           >In Progress</v-btn>
           <v-btn
-            v-else-if="task.inProgress"
+            v-else-if="task.inProgress && listType !== 'completedTasks'"
             small
-            color="error"
-            class="status-btn"
+            class="status-btn in-progress"
             @click="changeStatus(id, !task.inProgress)"
           >Not In Progress</v-btn>
         </v-list-item-action>
@@ -95,7 +94,7 @@ export default {
 
 <style scoped lang="scss">
 .completed {
-  color: #8bc34a;
+  color: #689F38;
   text-decoration: line-through;
 }
 
@@ -112,6 +111,11 @@ export default {
 
 .status-btn {
   margin-right: 20px;
+}
+
+.status-btn.in-progress {
+  margin-right: 20px;
+  color: #FFA000;
 }
 
 .mdi-calendar {
