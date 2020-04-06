@@ -50,6 +50,7 @@ import {
   sameAs,
   helpers
 } from "vuelidate/lib/validators";
+import { mapActions } from "vuex";
 
 const aplhanumeric = helpers.regex("aplhanumeric", /^[a-zA-Z0-9]*$/);
 
@@ -125,8 +126,16 @@ export default {
     }
   },
   methods: {
+    ...mapActions("authStore", ["register"]),
     submit() {
       this.$v.$touch();
+
+      if (!this.$v.$error) {
+        this.register({
+          email: this.email,
+          password: this.password
+        });
+      }
     },
     clear() {
       this.$v.$reset();

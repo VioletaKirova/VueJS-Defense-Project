@@ -34,6 +34,7 @@
 <script>
 import { validationMixin } from "vuelidate";
 import { required } from "vuelidate/lib/validators";
+import { mapActions } from "vuex";
 
 export default {
   mixins: [validationMixin],
@@ -74,8 +75,16 @@ export default {
     password: { required }
   },
   methods: {
+    ...mapActions("authStore", ["login"]),
     submit() {
       this.$v.$touch();
+
+      if (!this.$v.$error) {
+        this.login({
+          email: this.email,
+          password: this.password
+        });
+      }
     },
     clear() {
       this.$v.$reset();
