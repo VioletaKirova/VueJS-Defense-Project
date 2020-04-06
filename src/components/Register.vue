@@ -6,15 +6,6 @@
           <v-subheader>Register</v-subheader>
           <form>
             <v-text-field
-              v-model="name"
-              :error-messages="nameErrors"
-              :counter="10"
-              label="Name"
-              required
-              @input="$v.name.$touch()"
-              @blur="$v.name.$touch()"
-            ></v-text-field>
-            <v-text-field
               v-model="email"
               :error-messages="emailErrors"
               label="E-mail"
@@ -66,28 +57,12 @@ export default {
   mixins: [validationMixin],
   data: function() {
     return {
-      name: "",
       email: "",
       password: "",
       rePassword: ""
     };
   },
   computed: {
-    nameErrors() {
-      const errors = [];
-
-      if (!this.$v.name.$dirty) {
-        return errors;
-      }
-      if (!this.$v.name.required) {
-        errors.push("Name is required");
-      }
-      if (!this.$v.name.maxLength) {
-        errors.push("Name must be at most 10 characters long");
-      } 
-
-      return errors;
-    },
     emailErrors() {
       const errors = [];
 
@@ -113,7 +88,7 @@ export default {
         errors.push("Password is required");
       }
       if (!this.$v.password.minLength) {
-        errors.push("Password must be at least 3 characters long");
+        errors.push("Password must be at least 6 characters long");
       }
       if (!this.$v.password.maxLength) {
         errors.push("Password must be at most 16 characters long");
@@ -138,11 +113,10 @@ export default {
     }
   },
   validations: {
-    name: { required, maxLength: maxLength(10) },
     email: { required, email },
     password: {
       required,
-      minLength: minLength(3),
+      minLength: minLength(6),
       maxLength: maxLength(16),
       aplhanumeric
     },
@@ -156,7 +130,6 @@ export default {
     },
     clear() {
       this.$v.$reset();
-      this.name = "";
       this.email = "";
       this.password = "";
       this.rePassword = "";

@@ -9,28 +9,32 @@ const taskStore = {
   state: {
     tasks: {
       "01": {
-        description: "Task 1",
+        title: "Task 1",
+        description: "Task 1 Desc",
         inProgress: false,
         completed: false,
         date: "22/05/2020",
         time: "18:00",
       },
       "02": {
-        description: "Task 2",
+        title: "Task 2",
+        description: "Task 2 Desc",
         inProgress: false,
         completed: false,
         date: "30/05/2020",
         time: "08:00",
       },
       "03": {
-        description: "Task 3",
+        title: "Task 3",
+        description: "Task 3 Desc",
         inProgress: false,
         completed: false,
         date: "03/06/2020",
         time: "15:00",
-      }
+      },
     },
     searchValue: "",
+    currentTaskId: "",
   },
   mutations: {
     create(state, data) {
@@ -44,6 +48,9 @@ const taskStore = {
     },
     setSearchValue(state, value) {
       state.searchValue = value;
+    },
+    setCurrentTaskId(state, value) {
+      state.currentTaskId = value;
     },
   },
   actions: {
@@ -62,6 +69,9 @@ const taskStore = {
     setSearchValue({ commit }, value) {
       commit("setSearchValue", value);
     },
+    setCurrentTaskId({ commit }, value) {
+      commit("setCurrentTaskId", value);
+    },
   },
   getters: {
     allTasks(state) {
@@ -72,7 +82,11 @@ const taskStore = {
 
       if (state.searchValue) {
         Object.keys(state.tasks).forEach((id) => {
-          if (state.tasks[id].description.toLowerCase().includes(state.searchValue.toLowerCase())) {
+          if (
+            state.tasks[id].title
+              .toLowerCase()
+              .includes(state.searchValue.toLowerCase())
+          ) {
             tasks[id] = state.tasks[id];
           }
         });
@@ -117,6 +131,9 @@ const taskStore = {
       });
 
       return tasks;
+    },
+    currentTask(state, getters) {
+      return getters.allTasks[state.currentTaskId];
     },
   },
 };

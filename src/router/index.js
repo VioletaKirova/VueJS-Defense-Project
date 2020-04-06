@@ -35,6 +35,12 @@ const routes = [
       import("../components/EditTask.vue")
   },
   {
+    path: "/details/:id",
+    name: "Details",
+    component: () =>
+      import("../components/TaskDetails.vue")
+  },
+  {
     path: "/register",
     name: "Register",
     component: () =>

@@ -5,6 +5,14 @@
         <v-row align="center" justify="start">
           <v-subheader>Edit Task</v-subheader>
           <form>
+            <v-text-field
+              v-model="title"
+              :error-messages="titleErrors"
+              label="Title"
+              required
+              @input="$v.title.$touch()"
+              @blur="$v.title.$touch()"
+            ></v-text-field>
             <v-textarea
               v-model="description"
               :error-messages="descriptionErrors"
@@ -37,6 +45,7 @@ export default {
   data: function() {
     return {
       task: {},
+      title: "",
       description: "",
       date: null,
       time: null
@@ -50,6 +59,21 @@ export default {
     currentTask() {
       return this.allTasks[this.currentTaskId];
     },
+    titleErrors() {
+      const errors = [];
+
+      if (!this.$v.title.$dirty) {
+        return errors;
+      }
+      if (!this.$v.title.maxLength) {
+        errors.push("Title must be at most 10 characters long");
+      }
+      if (!this.$v.title.required) {
+        errors.push("Title is required");
+      }
+
+      return errors;
+    },
     descriptionErrors() {
       const errors = [];
 
@@ -61,12 +85,16 @@ export default {
       }
       if (!this.$v.description.maxLength) {
         errors.push("Description must be at most 512 characters long");
-      }     
+      }
 
       return errors;
     }
   },
   validations: {
+    title: {
+      required,
+      maxLength: maxLength(10)
+    },
     description: {
       required,
       maxLength: maxLength(512)
@@ -85,6 +113,7 @@ export default {
 
       if (!this.$v.$error) {
         this.task = {
+          title: this.title,
           description: this.description,
           date: this.date,
           time: this.time,
@@ -105,15 +134,16 @@ export default {
     AppDateDialog
   },
   created() {
+    this.title = this.currentTask.title;
     this.description = this.currentTask.description;
     this.date = this.currentTask.date;
     this.time = this.currentTask.time;
 
-    if(this.currentTask.inProgress) {
+    if (this.currentTask.inProgress) {
       this.inProgress = true;
     }
 
-    if(this.currentTask.completed) {
+    if (this.currentTask.completed) {
       this.completed = true;
     }
   }

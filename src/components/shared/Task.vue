@@ -1,6 +1,6 @@
 <template>
   <div class="task">
-    <v-list-item>
+    <v-list-item @click="navigateToDetails">
       <template>
         <v-list-item-action>
           <v-checkbox
@@ -11,7 +11,7 @@
         </v-list-item-action>
 
         <v-list-item-content>
-          <v-list-item-title :class="{ completed: task.completed }">{{ task.description }}</v-list-item-title>
+          <v-list-item-title :class="{ completed: task.completed }">{{ task.title }}</v-list-item-title>
         </v-list-item-content>
 
         <v-list-item-action>
@@ -38,7 +38,7 @@
       </template>
 
       <v-col class="text-center actions-wrapper" cols="12" sm="1">
-        <v-btn text small color="primary" @click="navigateToEdit(id)">Edit</v-btn>
+        <v-btn text small color="primary" @click="navigateToEdit">Edit</v-btn>
 
         <v-dialog v-model="dialog" width="400">
           <template v-slot:activator="{ on }">
@@ -49,7 +49,7 @@
             <v-card-title class="headline grey lighten-2" primary-title>Are you sure?</v-card-title>
             <v-divider></v-divider>
             <v-card-actions class="card-actions-wrapper">
-              <v-btn color="error" class="card-delete-btn" text @click="confirmDelete(id)">Delete it</v-btn>
+              <v-btn color="error" class="card-delete-btn" text @click="confirmDelete">Delete it</v-btn>
               <v-btn color="primary" text @click="dialog = false">Keep it</v-btn>
             </v-card-actions>
           </v-card>
@@ -84,9 +84,12 @@ export default {
     navigateToEdit() {
       this.$router.push({ name: "Edit", params: { id: this.id } });
     },
-    confirmDelete(id) {
+    navigateToDetails() {
+      this.$router.push({ name: "Details", params: { id: this.id } });
+    },
+    confirmDelete() {
       this.dialog = false;
-      this.deleteById(id);
+      this.deleteById(this.id);
     }
   }
 };
@@ -114,7 +117,6 @@ export default {
 }
 
 .status-btn.in-progress {
-  margin-right: 20px;
   color: #FFA000;
 }
 

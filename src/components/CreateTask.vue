@@ -5,6 +5,14 @@
         <v-row align="center" justify="start">
           <v-subheader>Create Task</v-subheader>
           <form>
+            <v-text-field
+              v-model="title"
+              :error-messages="titleErrors"
+              label="Title"
+              required
+              @input="$v.title.$touch()"
+              @blur="$v.title.$touch()"
+            ></v-text-field>
             <v-textarea
               v-model="description"
               :error-messages="descriptionErrors"
@@ -36,31 +44,49 @@ export default {
   data: function() {
     return {
       task: {},
+      title: "",
       description: "",
       date: null,
       time: null
     };
   },
   computed: {
+    titleErrors() {
+      const errors = [];
+
+      if (!this.$v.title.$dirty) {
+        return errors;
+      }
+      if (!this.$v.title.maxLength) {
+        errors.push("Title must be at most 10 characters long");
+      }
+      if (!this.$v.title.required) {
+        errors.push("Title is required");
+      }
+
+      return errors;
+    },
     descriptionErrors() {
       const errors = [];
 
       if (!this.$v.description.$dirty) {
         return errors;
       }
-
       if (!this.$v.description.maxLength) {
         errors.push("Description must be at most 512 characters long");
       }
-
       if (!this.$v.description.required) {
-        errors.push("Description is required.");
+        errors.push("Description is required");
       }
 
       return errors;
     }
   },
   validations: {
+    title: {
+      required,
+      maxLength: maxLength(10)
+    },
     description: {
       required,
       maxLength: maxLength(512)
@@ -79,6 +105,7 @@ export default {
 
       if (!this.$v.$error) {
         this.task = {
+          title: this.title,
           description: this.description,
           date: this.date,
           time: this.time,
