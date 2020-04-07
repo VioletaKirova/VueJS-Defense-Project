@@ -1,35 +1,13 @@
 import Vue from "vue";
 import { uuid } from "vue-uuid";
+import * as firebase from "firebase/app";
+require("firebase/auth");
+require("firebase/database");
 
 export default {
   namespaced: true,
   state: {
-    tasks: {
-      "01": {
-        title: "Task 1",
-        description: "Task 1 Desc",
-        inProgress: false,
-        completed: false,
-        date: "22/05/2020",
-        time: "18:00",
-      },
-      "02": {
-        title: "Task 2",
-        description: "Task 2 Desc",
-        inProgress: false,
-        completed: false,
-        date: "30/05/2020",
-        time: "08:00",
-      },
-      "03": {
-        title: "Task 3",
-        description: "Task 3 Desc",
-        inProgress: false,
-        completed: false,
-        date: "03/06/2020",
-        time: "15:00",
-      },
-    },
+    tasks: {},
     searchValue: "",
     currentTaskId: "",
   },
@@ -68,6 +46,39 @@ export default {
     },
     setCurrentTaskId({ commit }, value) {
       commit("setCurrentTaskId", value);
+    },
+    getDataFromDb({ commit }) {
+      const userId = firebase.auth().currentUser.uid;
+      const userTasks = firebase.database().ref(`tasks/${userId}`);
+
+      // On add
+      userTasks.on("child_added", snapshot => {
+        const task = snapshot.val();
+
+        const data = {
+          id: snapshot.key,
+          task: task
+        }
+
+        commit("create", data);
+      })
+
+      // On change
+      userTasks.on("child_changed", snapshot => {
+        const task = snapshot.val();
+
+        const data = {
+          id: snapshot.key,
+          value: task
+        }
+
+        commit("updateById", data);
+      })
+
+      // On remove
+      userTasks.on("child_removed", snapshot => {
+        commit("deleteById", snapshot.key);
+      })
     },
   },
   getters: {

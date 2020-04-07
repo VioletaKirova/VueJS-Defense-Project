@@ -44,19 +44,22 @@ export default {
         if (user) {
           commit("setIsLogged", true);
           localStorage.setItem("isLogged", 1);
-          dispatch("redirect", "/dashboard")    
+
+          dispatch("taskStore/getDataFromDb", null, { root: true });
+
+          dispatch("redirect", "/dashboard");
         } else {
           commit("setIsLogged", false);
           localStorage.setItem("isLogged", 0);
-          dispatch("redirect", "/")  
+          dispatch("redirect", "/");
         }
       });
     },
     redirect(_, value) {
-      if(router.history.current.path !== value) {
+      if (router.history.current.path !== value) {
         router.push(value);
-      } 
-    }
+      }
+    },
   },
   getters: {},
 };
