@@ -55,7 +55,7 @@ export default {
   data: function() {
     return {
       items: [
-        { icon: "mdi-view-list", text: "Tasks", route: "/" },
+        { icon: "mdi-view-list", text: "Tasks", route: "/dashboard" },
         {
           icon: "mdi-chevron-up",
           "icon-alt": "mdi-chevron-down",

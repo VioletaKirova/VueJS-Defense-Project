@@ -9,12 +9,19 @@
 
 <script>
 import AppHeader from "./components/core/Header.vue";
+import { mapActions } from "vuex";
 
 export default {
   components: {
     AppHeader
+  },
+  methods: {
+    ...mapActions("authStore", ["authStateChangeHandler"])
+  },
+  mounted() {
+    this.authStateChangeHandler();
   }
-}
+};
 </script>
 
 <style lang="scss">
@@ -34,11 +41,11 @@ div.task-list.completed-list > main {
 
 .in-progress-list .v-subheader,
 .in-progress-tasks .v-subheader {
-  color: #FFA000 !important;
+  color: #ffa000 !important;
 }
 
 .completed-list .v-subheader,
 .completed-tasks .v-subheader {
-  color: #689F38 !important;
+  color: #689f38 !important;
 }
 </style>

@@ -125,7 +125,7 @@ export default {
           id: this.currentTaskId,
           value: this.task
         });
-        this.$router.push("/");
+        this.$router.push("/dashboard");
       }
     }
   },

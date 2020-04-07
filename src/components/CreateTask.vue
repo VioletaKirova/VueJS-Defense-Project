@@ -114,7 +114,7 @@ export default {
         };
 
         this.create(this.task);
-        this.$router.push("/");
+        this.$router.push("/dashboard");
       }
     }
   },

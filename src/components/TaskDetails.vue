@@ -87,7 +87,7 @@ export default {
     confirmDelete() {
       this.dialog = false;
       this.deleteById(this.id);
-      this.$router.push("/");
+      this.$router.push("/dashboard");
     }
   },
   created() {

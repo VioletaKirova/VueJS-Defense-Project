@@ -6,19 +6,29 @@
     </v-toolbar-title>
     <app-search-bar></app-search-bar>
     <v-spacer />
-    <v-btn to="/register" class="nav-bar-btn" color="primary">Register</v-btn>
-    <v-btn to="/login" class="nav-bar-btn" color="primary">Login</v-btn>
+    <template v-if="!isLogged">
+      <v-btn to="/register" class="nav-bar-btn" color="primary">Register</v-btn>
+      <v-btn to="/login" class="nav-bar-btn" color="primary">Login</v-btn>
+    </template>
+    <template v-else>
+      <v-btn class="nav-bar-btn" color="primary" @click="logout">logout</v-btn>
+    </template>
   </v-app-bar>
 </template>
 
 <script>
 import AppSearchBar from "./SearchBar.vue";
+import { mapState, mapActions } from "vuex";
 
 export default {
   props: {
     drawer: Boolean
   },
+  computed: {
+    ...mapState("authStore", ["isLogged"])
+  },
   methods: {
+    ...mapActions("authStore", ["logout"]),
     toggleDrawerHandler() {
       this.$emit("toggle", !this.drawer);
     }
