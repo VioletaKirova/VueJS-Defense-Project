@@ -64,14 +64,18 @@ export default {
           model: true,
           children: [
             {
+              icon: "mdi-format-list-numbered",
+              text: "To Do",
+              route: "/to-do"
+            },
+            {
               icon: "mdi-progress-clock",
               text: "In Progress",
               route: "/in-progress"
             },
-            { icon: "mdi-check", text: "Completed", route: "/completed" },
+            { icon: "mdi-check", text: "Completed", route: "/completed" }
           ]
         },
-        { icon: "mdi-settings", text: "Settings", route: "/settings" },
         { icon: "mdi-information", text: "About", route: "/about" }
       ]
     };
@@ -93,6 +97,6 @@ a.v-list-item {
 }
 
 .v-list-item .v-list-item--active {
-  color: #1976D2;
+  color: #1976d2;
 }
 </style>

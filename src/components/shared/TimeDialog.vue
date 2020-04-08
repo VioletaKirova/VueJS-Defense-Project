@@ -7,7 +7,15 @@
     width="290px"
   >
     <template v-slot:activator="{ on }">
-      <v-text-field v-model="timeValue" label="Time" prepend-icon="mdi-clock-outline" readonly v-on="on"></v-text-field>
+      <v-text-field
+        v-model="timeValue"
+        label="Time"
+        prepend-icon="mdi-clock-outline"
+        append-icon="mdi-close"
+        readonly
+        v-on="on"
+        @click:append="fieldClearHandler"
+      ></v-text-field>
     </template>
     <v-time-picker v-if="timeDialog" v-model="timeValue" full-width>
       <v-spacer></v-spacer>
@@ -22,7 +30,7 @@ export default {
   data: function() {
     return {
       timeValue: null,
-      timeDialog: false,
+      timeDialog: false
     };
   },
   props: {
@@ -34,10 +42,14 @@ export default {
     setTimeHandler() {
       this.$refs.timeDialog.save(this.timeValue);
       this.$emit("setTime", this.timeValue);
+    },
+    fieldClearHandler() {
+      this.timeValue = null;
+      this.$emit("setTime", null);
     }
   },
   created() {
-    if(this.taskTimeValue) {
+    if (this.taskTimeValue) {
       this.timeValue = this.taskTimeValue;
     }
   }

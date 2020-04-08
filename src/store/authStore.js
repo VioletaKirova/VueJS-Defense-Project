@@ -18,9 +18,7 @@ export default {
       firebase
         .auth()
         .createUserWithEmailAndPassword(data.email, data.password)
-        .then(() => {
-          router.push("/login");
-        })
+        .then()
         .catch((err) => {
           //TODO: Show error message
           console.log(err);
@@ -50,7 +48,10 @@ export default {
           dispatch("redirect", "/dashboard");
         } else {
           commit("setIsLogged", false);
+          commit("taskStore/clear", null, { root: true });
+
           localStorage.setItem("isLogged", 0);
+
           dispatch("redirect", "/");
         }
       });

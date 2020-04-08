@@ -16,6 +16,11 @@ const routes = [
     component: () => import("../components/Dashboard.vue"),
   },
   {
+    path: "/to-do",
+    name: "ToDo",
+    component: () => import("../components/ToDoTasks.vue"),
+  },
+  {
     path: "/in-progress",
     name: "InProgress",
     component: () => import("../components/InProgressTasks.vue"),
@@ -45,29 +50,33 @@ const routes = [
     name: "Register",
     component: () => import("../components/Register.vue"),
     beforeEnter: (to, from, next) => {
-      if(localStorage.getItem("isLogged") == 1) {
-        next("/")
+      if (localStorage.getItem("isLogged") == 1) {
+        next("/");
       } else {
         next();
       }
-    }
+    },
   },
   {
     path: "/login",
     name: "Login",
     component: () => import("../components/Login.vue"),
     beforeEnter: (to, from, next) => {
-      if(localStorage.getItem("isLogged") == 1) {
-        next("/")
+      if (localStorage.getItem("isLogged") == 1) {
+        next("/");
       } else {
         next();
       }
-    }
+    },
   },
   {
     path: "/about",
     name: "About",
     component: () => import("../components/About.vue"),
+  },
+  {
+    path: "*",
+    component: () => import("../components/NotFound.vue"),
   },
 ];
 

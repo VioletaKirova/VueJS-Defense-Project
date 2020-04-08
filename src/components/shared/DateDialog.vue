@@ -7,7 +7,15 @@
     width="290px"
   >
     <template v-slot:activator="{ on }">
-      <v-text-field v-model="dateValue" label="Date" prepend-icon="mdi-calendar" readonly v-on="on"></v-text-field>
+      <v-text-field
+        v-model="dateValue"
+        label="Date"
+        prepend-icon="mdi-calendar"
+        append-icon="mdi-close"
+        readonly
+        v-on="on"
+        @click:append="fieldClearHandler"
+      ></v-text-field>
     </template>
     <v-date-picker v-model="dateValue" scrollable>
       <v-spacer></v-spacer>
@@ -23,7 +31,7 @@ export default {
     return {
       dateValue: null,
       dateDialog: false
-    }
+    };
   },
   props: {
     taskDateValue: {
@@ -34,10 +42,14 @@ export default {
     setDateHandler() {
       this.$refs.dateDialog.save(this.dateValue);
       this.$emit("setDate", this.dateValue);
+    },
+    fieldClearHandler() {
+      this.dateValue = null;
+      this.$emit("setDate", null);
     }
   },
   created() {
-    if(this.taskDateValue) {
+    if (this.taskDateValue) {
       this.dateValue = this.taskDateValue;
     }
   }

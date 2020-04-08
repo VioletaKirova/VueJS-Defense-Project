@@ -27,6 +27,9 @@ export default {
     setCurrentTaskId(state, value) {
       state.currentTaskId = value;
     },
+    clear(state) {
+      state.tasks = {};
+    },
   },
   actions: {
     create({ dispatch }, data) {
