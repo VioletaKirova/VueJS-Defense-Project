@@ -47,8 +47,10 @@ export default {
       task: {},
       title: "",
       description: "",
-      date: null,
-      time: null
+      date: "",
+      time: "",
+      inProgress: false,
+      completed: false
     };
   },
   computed: {
@@ -115,11 +117,12 @@ export default {
         this.task = {
           title: this.title,
           description: this.description,
-          date: this.date,
-          time: this.time,
           inProgress: this.inProgress,
           completed: this.completed
         };
+
+        this.task.date = this.date ? this.date : "";
+        this.task.time = this.time ? this.time : "";
 
         this.updateById({
           id: this.currentTaskId,
@@ -138,14 +141,8 @@ export default {
     this.description = this.currentTask.description;
     this.date = this.currentTask.date;
     this.time = this.currentTask.time;
-
-    if (this.currentTask.inProgress) {
-      this.inProgress = true;
-    }
-
-    if (this.currentTask.completed) {
-      this.completed = true;
-    }
+    this.inProgress = this.currentTask.inProgress;
+    this.completed = this.currentTask.completed;
   }
 };
 </script>

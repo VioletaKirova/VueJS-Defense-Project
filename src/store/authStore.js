@@ -45,7 +45,7 @@ export default {
           commit("setIsLogged", true);
           localStorage.setItem("isLogged", 1);
 
-          dispatch("taskStore/getDataFromDb", null, { root: true });
+          dispatch("taskStore/getTasksFromDb", null, { root: true });
 
           dispatch("redirect", "/dashboard");
         } else {

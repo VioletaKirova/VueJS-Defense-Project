@@ -29,17 +29,17 @@ export default {
     },
   },
   actions: {
-    create({ commit }, data) {
-      commit("create", {
+    create({ dispatch }, data) {
+      dispatch("addTaskInDb", {
         id: uuid.v4(),
         task: data,
       });
     },
-    updateById({ commit }, data) {
-      commit("updateById", data);
+    updateById({ dispatch }, data) {
+      dispatch("updateTaskInDb", data);
     },
-    deleteById({ commit }, id) {
-      commit("deleteById", id);
+    deleteById({ dispatch }, id) {
+      dispatch("deleteTaskInDb", id);
     },
     setSearchValue({ commit }, value) {
       commit("setSearchValue", value);
@@ -47,38 +47,56 @@ export default {
     setCurrentTaskId({ commit }, value) {
       commit("setCurrentTaskId", value);
     },
-    getDataFromDb({ commit }) {
+    getTasksFromDb({ commit }) {
       const userId = firebase.auth().currentUser.uid;
       const userTasks = firebase.database().ref(`tasks/${userId}`);
 
       // On add
-      userTasks.on("child_added", snapshot => {
+      userTasks.on("child_added", (snapshot) => {
         const task = snapshot.val();
 
         const data = {
           id: snapshot.key,
-          task: task
-        }
+          task: task,
+        };
 
         commit("create", data);
-      })
+      });
 
       // On change
-      userTasks.on("child_changed", snapshot => {
+      userTasks.on("child_changed", (snapshot) => {
         const task = snapshot.val();
 
         const data = {
           id: snapshot.key,
-          value: task
-        }
+          value: task,
+        };
 
         commit("updateById", data);
-      })
+      });
 
       // On remove
-      userTasks.on("child_removed", snapshot => {
+      userTasks.on("child_removed", (snapshot) => {
         commit("deleteById", snapshot.key);
-      })
+      });
+    },
+    addTaskInDb(_, data) {
+      const userId = firebase.auth().currentUser.uid;
+      const userTask = firebase.database().ref(`tasks/${userId}/${data.id}`);
+
+      userTask.set(data.task);
+    },
+    updateTaskInDb(_, data) {
+      const userId = firebase.auth().currentUser.uid;
+      const userTask = firebase.database().ref(`tasks/${userId}/${data.id}`);
+
+      userTask.update(data.value);
+    },
+    deleteTaskInDb(_, id) {
+      const userId = firebase.auth().currentUser.uid;
+      const userTask = firebase.database().ref(`tasks/${userId}/${id}`);
+
+      userTask.remove();
     },
   },
   getters: {
