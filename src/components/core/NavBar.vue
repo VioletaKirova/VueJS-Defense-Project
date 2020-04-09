@@ -2,7 +2,7 @@
   <v-app-bar :clipped-left="$vuetify.breakpoint.lgAndUp" app color="blue darken-3" dark>
     <v-app-bar-nav-icon @click="toggleDrawerHandler" />
     <v-toolbar-title style="width: 300px" class="ml-0 pl-4">
-      <span class="hidden-sm-and-down">Do It</span>
+      <v-btn to="/dashboard" class="nav-bar-btn logo" text color="white">Do It</v-btn>
     </v-toolbar-title>
     <app-search-bar></app-search-bar>
     <v-spacer />
@@ -40,6 +40,10 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.v-btn.nav-bar-btn.logo {
+  font-size: 18px;
+}
+
 .nav-bar-btn {
   margin-left: 8px;
 }
