@@ -33,8 +33,8 @@
 </template>
 
 <script>
-import AppTimeDialog from "./shared/TimeDialog.vue";
-import AppDateDialog from "./shared/DateDialog.vue";
+import AppTimeDialog from "../shared/TimeDialog.vue";
+import AppDateDialog from "../shared/DateDialog.vue";
 import { validationMixin } from "vuelidate";
 import { required, maxLength } from "vuelidate/lib/validators";
 import { mapActions } from "vuex";

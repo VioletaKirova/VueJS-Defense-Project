@@ -7,7 +7,7 @@
 <script>
 export default {
   components: {
-    AppTaskList: require("./shared/TaskList.vue").default
+    AppTaskList: require("../shared/TaskList.vue").default
   }
 };
 </script>
