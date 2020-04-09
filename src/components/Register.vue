@@ -31,6 +31,7 @@
               @input="$v.rePassword.$touch()"
               @blur="$v.rePassword.$touch()"
             ></v-text-field>
+            <p class="error-message">{{ authError }}</p>
             <v-btn class="primary mr-4" @click="submit">Register</v-btn>
             <v-btn @click="clear">Clear</v-btn>
           </form>
@@ -50,7 +51,7 @@ import {
   sameAs,
   helpers
 } from "vuelidate/lib/validators";
-import { mapActions } from "vuex";
+import { mapActions, mapState } from "vuex";
 
 const aplhanumeric = helpers.regex("aplhanumeric", /^[a-zA-Z0-9]*$/);
 
@@ -64,6 +65,7 @@ export default {
     };
   },
   computed: {
+    ...mapState("authStore", ["authError"]),
     emailErrors() {
       const errors = [];
 

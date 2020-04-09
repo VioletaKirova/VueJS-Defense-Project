@@ -22,6 +22,7 @@
               @input="$v.password.$touch()"
               @blur="$v.password.$touch()"
             ></v-text-field>
+            <p class="error-message">{{ authError }}</p>
             <v-btn class="primary mr-4" @click="submit">Login</v-btn>
             <v-btn @click="clear">Clear</v-btn>
           </form>
@@ -34,7 +35,7 @@
 <script>
 import { validationMixin } from "vuelidate";
 import { required } from "vuelidate/lib/validators";
-import { mapActions } from "vuex";
+import { mapActions, mapState } from "vuex";
 
 export default {
   mixins: [validationMixin],
@@ -45,6 +46,7 @@ export default {
     };
   },
   computed: {
+    ...mapState("authStore", ["authError"]),
     emailErrors() {
       const errors = [];
 

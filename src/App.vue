@@ -48,4 +48,8 @@ div.task-list.completed-list > main {
 .completed-tasks .v-subheader {
   color: #689f38 !important;
 }
+
+.error-message {
+  color: #ff5252;
+}
 </style>

@@ -10,6 +10,7 @@ export default {
     tasks: {},
     searchValue: "",
     currentTaskId: "",
+    showTaskLoader: true,
   },
   mutations: {
     create(state, data) {
@@ -30,6 +31,9 @@ export default {
     clear(state) {
       state.tasks = {};
     },
+    setShowTaskLoader(state, value) {
+      state.showTaskLoader = value;
+    }
   },
   actions: {
     create({ dispatch }, data) {
@@ -53,6 +57,11 @@ export default {
     getTasksFromDb({ commit }) {
       const userId = firebase.auth().currentUser.uid;
       const userTasks = firebase.database().ref(`tasks/${userId}`);
+
+      // On init
+      userTasks.once("value", () => {
+        commit("setShowTaskLoader", false);
+      })
 
       // On add
       userTasks.on("child_added", (snapshot) => {
