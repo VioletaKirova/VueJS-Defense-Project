@@ -18,22 +18,22 @@ Project for the Vue.js course @SoftUni
 * Create Task Page
 * Edit Task Page
 * Task Details Page
-* Dashboard *(All Tasks)*
-* To Do Page *(Tasks with status To Do)*
-* In Progress Page *(Tasks with status In Progress)*
-* Completed Page *(Tasks with status Completed)*
+* Dashboard - *All Tasks*
+* To Do Page - *Tasks with status To Do*
+* In Progress - Page *Tasks with status In Progress*
+* Completed Page - *Tasks with status Completed*
 * Search Bar
 
 
 
 ## Used Tools
 
-Vue.js
-Vuetify
-Firebase
-Node.js
-Npm
-Visual Studio Code
+* Vue.js
+* Vuetify
+* Firebase
+* Node.js
+* Npm
+* Visual Studio Code
 
 
 
