@@ -1,8 +1,6 @@
 # Do It
 
-Project for the Vue.js course @SoftUni
-
-
+Project for the Vue.js course @ SoftUni
 
 ## Description
 
@@ -11,7 +9,7 @@ Project for the Vue.js course @SoftUni
 **Guest users have access to:**
 * Home Page
 * About Page
-* Regiser Page
+* Register Page
 * Login Page
 
 **Registered users have access to:**
@@ -20,11 +18,9 @@ Project for the Vue.js course @SoftUni
 * Task Details Page
 * Dashboard - *All Tasks*
 * To Do Page - *Tasks with status To Do*
-* In Progress - Page *Tasks with status In Progress*
+* In Progress Page - *Tasks with status In Progress*
 * Completed Page - *Tasks with status Completed*
 * Search Bar
-
-
 
 ## Used Tools
 
@@ -35,13 +31,10 @@ Project for the Vue.js course @SoftUni
 * Npm
 * Visual Studio Code
 
-
-
 ## Setup
 ```
 npm install
 ```
-
 ```
 npm run serve
 ```

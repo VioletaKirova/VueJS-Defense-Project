@@ -6,7 +6,7 @@
           <v-checkbox
             v-model="task.completed"
             color="primary"
-            @change="updateById({ id: id, value: $event })"
+            @change="changeCompletedStatus(id, !!task.completed)"
           ></v-checkbox>
         </v-list-item-action>
 
@@ -20,13 +20,13 @@
             small
             color="primary"
             class="status-btn"
-            @click="changeStatus(id, !task.inProgress)"
+            @click="changeInRrogressStatus(id, !!task.inProgress)"
           >In Progress</v-btn>
           <v-btn
             v-else-if="task.inProgress && listType !== 'completedTasks'"
             small
             class="status-btn in-progress"
-            @click="changeStatus(id, !task.inProgress)"
+            @click="changeInRrogressStatus(id, !task.inProgress)"
           >Not In Progress</v-btn>
         </v-list-item-action>
 
@@ -78,7 +78,10 @@ export default {
   },
   methods: {
     ...mapActions("taskStore", ["updateById", "deleteById"]),
-    changeStatus(id, value) {
+    changeCompletedStatus(id, value) {
+      this.updateById({ id, value: { completed: value } });
+    },
+    changeInRrogressStatus(id, value) {
       this.updateById({ id, value: { inProgress: value } });
     },
     navigateToEdit() {
@@ -97,7 +100,7 @@ export default {
 
 <style scoped lang="scss">
 .completed {
-  color: #689F38;
+  color: #689f38;
   text-decoration: line-through;
 }
 
@@ -117,7 +120,7 @@ export default {
 }
 
 .status-btn.in-progress {
-  color: #FFA000;
+  color: #ffa000;
 }
 
 .mdi-calendar {
