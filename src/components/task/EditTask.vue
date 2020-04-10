@@ -66,7 +66,7 @@ export default {
         return errors;
       }
       if (!this.$v.title.maxLength) {
-        errors.push("Title must be at most 10 characters long");
+        errors.push("Title must be at most 20 characters long");
       }
       if (!this.$v.title.required) {
         errors.push("Title is required");
@@ -93,7 +93,7 @@ export default {
   validations: {
     title: {
       required,
-      maxLength: maxLength(10)
+      maxLength: maxLength(20)
     },
     description: {
       required,

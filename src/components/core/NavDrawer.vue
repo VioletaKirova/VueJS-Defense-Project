@@ -61,7 +61,7 @@ export default {
           "icon-alt": "mdi-chevron-down",
           text: "Less",
           "text-alt": "More",
-          model: true,
+          model: false,
           children: [
             {
               icon: "mdi-format-list-numbered",
@@ -98,5 +98,9 @@ a.v-list-item {
 
 .v-list-item .v-list-item--active {
   color: #1976d2;
+}
+
+div.v-list-group__header.v-list-item.v-list-item--link.theme--light > div.v-list-item__content > div {
+  padding-left: 16px;
 }
 </style>
