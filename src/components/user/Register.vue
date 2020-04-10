@@ -19,7 +19,6 @@
               label="Password"
               type="password"
               required
-              @input="$v.password.$touch()"
               @blur="$v.password.$touch()"
             ></v-text-field>
             <v-text-field
@@ -28,7 +27,6 @@
               label="Repeat Password"
               type="password"
               required
-              @input="$v.rePassword.$touch()"
               @blur="$v.rePassword.$touch()"
             ></v-text-field>
             <p class="error-message">{{ authError }}</p>

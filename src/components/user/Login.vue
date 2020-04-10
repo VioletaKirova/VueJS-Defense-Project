@@ -10,7 +10,6 @@
               :error-messages="emailErrors"
               label="E-mail"
               required
-              @input="$v.email.$touch()"
               @blur="$v.email.$touch()"
             ></v-text-field>
             <v-text-field
@@ -19,7 +18,6 @@
               label="Password"
               type="password"
               required
-              @input="$v.password.$touch()"
               @blur="$v.password.$touch()"
             ></v-text-field>
             <p class="error-message">{{ authError }}</p>

@@ -10,7 +10,6 @@
               :error-messages="titleErrors"
               label="Title"
               required
-              @input="$v.title.$touch()"
               @blur="$v.title.$touch()"
             ></v-text-field>
             <v-textarea
@@ -19,7 +18,6 @@
               :counter="512"
               label="Description"
               required
-              @input="$v.description.$touch()"
               @blur="$v.description.$touch()"
             ></v-textarea>
             <app-date-dialog :taskDateValue="null" @setDate="setDateHandler($event)"></app-date-dialog>

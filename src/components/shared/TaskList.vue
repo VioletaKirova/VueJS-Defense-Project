@@ -19,7 +19,7 @@
                 <v-btn small color="primary">Add a new task</v-btn>
               </router-link>
             </template>
-            <template v-else-if="listType !== 'inProgressTasks' && listType !== 'completedTasks' && searchValue">
+            <template v-else-if="listType === 'todoTasks' && Object.keys(filteredTasks).length === 0 && searchValue">
               <v-subheader>No results!</v-subheader>
               <v-btn small color="primary" @click="setSearchValue('')">Back to all tasks</v-btn>
             </template>
@@ -44,6 +44,9 @@ export default {
     ...mapState("taskStore", ["searchValue"]),
     tasks() {
       return this.$store.getters[`taskStore/${this.listType}`];
+    },
+    filteredTasks() {
+      return this.$store.getters[`taskStore/filteredTasks`];
     }
   },
   methods: {

@@ -20,7 +20,7 @@
             small
             color="primary"
             class="status-btn"
-            @click="changeInRrogressStatus(id, !!task.inProgress)"
+            @click="changeInRrogressStatus(id, !task.inProgress)"
           >In Progress</v-btn>
           <v-btn
             v-else-if="task.inProgress && listType !== 'completedTasks'"
